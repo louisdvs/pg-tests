@@ -16,10 +16,12 @@ Results based on the [test SQL script](./partition_stress_tests.sql)
 
  `Insert into non_partitioned | 00:00:00.000765 - fastest`
 
+ **Delete for a single account:**
+
  `Delete from range_partitioned where account_id = 5 | 00:00:00.002853`
 
  `Delete from hash_partitioned where account_id = 5 | 00:00:00.001088`
- 
+
  `Delete from non_partitioned where account_id = 5 | 00:00:00.000544`
 
 **Explain the deletes query plan:**
