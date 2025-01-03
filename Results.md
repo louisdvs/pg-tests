@@ -1,20 +1,24 @@
+Results based on the (test SQL script)[partition_stress_tests.sql]
+
 **Insert 100 rows for 10k accounts:**
 
-Insert into range_partitioned | 00:01:47.762861
-Insert into hash_partitioned | 00:01:52.061695
-Insert into non_partitioned | 00:01:50.348944
+`Insert into range_partitioned | 00:01:47.762861`
+`Insert into hash_partitioned | 00:01:52.061695`
+`Insert into non_partitioned | 00:01:50.348944`
 
 **Insert an additional 1 row to each table:**
 
- Insert into range_partitioned | 00:00:00.001633 - Slowest
- Insert into hash_partitioned | 00:00:00.001152 - middle
- Insert into non_partitioned | 00:00:00.000765 - fastest
+ `Insert into range_partitioned | 00:00:00.001633 - Slowest`
+ `Insert into hash_partitioned | 00:00:00.001152 - middle`
+ `Insert into non_partitioned | 00:00:00.000765 - fastest`
 
- Delete from range_partitioned where account_id = 5 | 00:00:00.002853
- Delete from hash_partitioned where account_id = 5 | 00:00:00.001088
- Delete from non_partitioned where account_id = 5 | 00:00:00.000544
+ `Delete from range_partitioned where account_id = 5 | 00:00:00.002853`
+ `Delete from hash_partitioned where account_id = 5 | 00:00:00.001088`
+ `Delete from non_partitioned where account_id = 5 | 00:00:00.000544`
 
+**Explain the deletes query plan:**
 
+```
  Delete on range_partitioned  (cost=0.29..180.47 rows=0 width=0) (actual time=0.047..0.047 rows=0 loops=1)
    Delete on range_partitioned_p0 range_partitioned_1
    ->  Index Scan using range_partitioned_p0_pkey on range_partitioned_p0 range_partitioned_1  (cost=0.29..180.47 rows=100 width=10) (actual time=0.045..0.045 rows=0 loops=1)
@@ -22,7 +26,9 @@ Insert into non_partitioned | 00:01:50.348944
  Planning Time: 0.304 ms
  Execution Time: 0.093 ms
 (6 rows)
+```
 
+```
 ----------------------------
  Delete on hash_partitioned  (cost=0.27..6.04 rows=0 width=0) (actual time=0.008..0.009 rows=0 loops=1)
    Delete on hash_partitioned_p2205 hash_partitioned_1
