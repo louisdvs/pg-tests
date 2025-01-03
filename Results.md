@@ -3,17 +3,23 @@ Results based on the [test SQL script](./partition_stress_tests.sql)
 **Insert 100 rows for 10k accounts:**
 
 `Insert into range_partitioned | 00:01:47.762861`
+
 `Insert into hash_partitioned | 00:01:52.061695`
+
 `Insert into non_partitioned | 00:01:50.348944`
 
 **Insert an additional 1 row to each table:**
 
  `Insert into range_partitioned | 00:00:00.001633 - Slowest`
+
  `Insert into hash_partitioned | 00:00:00.001152 - middle`
+
  `Insert into non_partitioned | 00:00:00.000765 - fastest`
 
  `Delete from range_partitioned where account_id = 5 | 00:00:00.002853`
+
  `Delete from hash_partitioned where account_id = 5 | 00:00:00.001088`
+ 
  `Delete from non_partitioned where account_id = 5 | 00:00:00.000544`
 
 **Explain the deletes query plan:**
