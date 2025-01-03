@@ -1,4 +1,4 @@
-Results based on the (test SQL script)[partition_stress_tests.sql]
+Results based on the [test SQL script](./partition_stress_tests.sql)
 
 **Insert 100 rows for 10k accounts:**
 
